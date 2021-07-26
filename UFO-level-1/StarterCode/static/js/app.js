@@ -10,11 +10,20 @@ var tbody = d3.select("tbody")
 var button = d3.select("#filter-btn"); 
 var tableContainer = d3.select("#ufo-table")
 
+function dateFinder(date) {
+   var datetimeValue = Date.parse(date.datetime);
 
+   return datetimeValue;
+};
 
 
 function buildTable(i) {
-    tableContainer.append("tbody",)
+    // Remove the old table
+    d3.select("tbody").remove();
+    tableContainer.append("tbody");
+    var tbody = d3.select("tbody");
+
+    // begin making new table 
     i.forEach(function(rows) { 
     var row = tbody.append("tr");
     Object.entries(rows).forEach(function([key,value]) {
@@ -32,19 +41,19 @@ function handleClick() {
     // console.log(inputField)
     var inputValue = inputField.property("value");
     // console.log(inputValue)
-    inputField.on("change", function() {
-        var newText = d3.event.target.value;
-        console.log(newText);
-      });
+    // inputField.on("change", function() {
+    //     var newText = d3.event.target.value;
+    //     console.log(newText);
+    //   });
   // grab all the table data and set to filteredData
     var filteredData = tableData;
    
   // Check to see if a date was entered and filter the
   // data using that date.
     if (inputValue) { 
+        inputDateValue = Date.parse(inputValue)
         console.log("yes")
-        var filteredData = filteredData.filter(i => i.datetime >= inputValue);
-        buildTable(filteredData);
+        var filteredData = filteredData.filter(i => dateFinder(i) >= inputDateValue);
     //  block of code to be executed if the condition is true
     };
 
@@ -65,4 +74,3 @@ button.on("click", handleClick);
 
 // Build the table when the page loads
 buildTable(tableData);
-
