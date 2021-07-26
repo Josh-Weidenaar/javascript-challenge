@@ -33,7 +33,7 @@ function buildTable(i) {
 })};
 
 function handleClick() {
-    console.log(d3.event);
+    // console.log(d3.event);
     d3.event.preventDefault();
   // Grab the datetime value from the filter
     // console.log("happening")
@@ -52,7 +52,7 @@ function handleClick() {
   // data using that date.
     if (inputValue) { 
         inputDateValue = Date.parse(inputValue)
-        console.log("yes")
+        // console.log("yes")
         var filteredData = filteredData.filter(i => dateFinder(i) >= inputDateValue);
     //  block of code to be executed if the condition is true
     };
